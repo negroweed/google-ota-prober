@@ -12,17 +12,5 @@ jobs:
         pip install -r requirements.txt
 
     - name: Check ota
-      shell: bash
-      env:
-        bot_token: ${{ secrets.BOT_TOKEN }}
-        chat_id: ${{ secrets.CHAT_ID }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        for file in configs/config-*.yml; do python probe2.py -c $file && echo "//"; done
-
-    - name: Check for updates and create release
-      if: success()
-      run: |
-        bash release.sh
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        for file in configs/config-*.yml; do python probe.py -c $file && echo "//"; done
